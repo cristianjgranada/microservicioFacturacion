@@ -2,8 +2,7 @@ const couchdb = require('../config/couchdb')
 const clsFactura = {}
 
 clsFactura.obtenerFacturas= async() => {
-    
-    let facturas = couchdb.db.use('facturas')
+    let facturas =couchdb.db.use('facturas')
     let result = await facturas.find({
         "selector": {
             "consecutivo": {
@@ -11,13 +10,11 @@ clsFactura.obtenerFacturas= async() => {
             }
         }
     })
-    
     if (!result.docs[0]){
-        return {codigo: -95, mensaje: "No se encontraron facturas"} 
+        return {codigo: -95, mensaje: "o se encontraron facturas"} 
     }else {
         return result.docs
     }
-        
 }
 
 clsFactura.obtenerFacturas_Cliente = async(clienteid) => {
@@ -26,7 +23,7 @@ clsFactura.obtenerFacturas_Cliente = async(clienteid) => {
         "selector": {
             "clienteid": {
                 "$eq" : clienteid
-            }
+            } 
         }
     })
     if (!result.docs[0]){
@@ -37,8 +34,8 @@ clsFactura.obtenerFacturas_Cliente = async(clienteid) => {
 }
 
 clsFactura.obtenerFacturas_Factura = async(consecutivo) => {
-    let productos = couchdb.db.use('facturas')
-    let result = await productos.find({
+    let facturas = couchdb.db.use('facturas')
+    let result = await facturas.find({
         "selector": {
             "consecutivo": {
                 "$eq" : parseInt( consecutivo)
@@ -51,4 +48,5 @@ clsFactura.obtenerFacturas_Factura = async(consecutivo) => {
         return result.docs[0]
     }
 }
+
 module.exports = clsFactura

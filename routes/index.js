@@ -15,4 +15,8 @@ router.post('/facturas', objRegistrarFactura.registrarFacturas)
 
 router.put('/anularfactura', objAnularFacturas.anularFactura )
 
+router.get('/test' , (req,res) => {
+    res.json({'Mensaje': 'Esto es una prueba' })
+} )
+
 module.exports = router
